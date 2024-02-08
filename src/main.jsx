@@ -8,6 +8,7 @@ import i18n from 'i18next';
 import translations from './locales/en/translation.json';
 import Fntranslation from './locales/es/translation.json'
 import { ClerkProvider } from '@clerk/clerk-react'
+import { BrowserRouter } from 'react-router-dom';
 
 
 
@@ -39,7 +40,9 @@ i18n
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
      <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
+      <BrowserRouter>
     <Suspense  fallback={<div>Loading...</div>}> <App /></Suspense>
+    </BrowserRouter>
     </ClerkProvider>
   </React.StrictMode>,
 )

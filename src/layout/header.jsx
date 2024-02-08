@@ -61,7 +61,7 @@ const ProfileDropDown = (props) => {
         </SignedIn>
         <SignedOut >
             <div className={`relative ${props.class}`}>
-                <div className="flex  items-center justify-center w-40 text-white bg-primaryColor p-2">Login / Register</div>
+                <a href="/sign-in" className="flex  items-center justify-center w-40 text-white bg-primaryColor p-2">Login / Register</a>
             </div>
         </SignedOut>
         </>

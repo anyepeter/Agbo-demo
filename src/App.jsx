@@ -8,17 +8,19 @@ import { Header } from "./layout/header";
 
 import SignIsn from "./pages/SignIn";
 import Signup from "./pages/Signup/Signup";
+import HomePage from "./pages/HomePage";
 
 function App() {  
   return (
     <>
-    <Header />
+    {/* <Header />
     <GoogleMap />
     <SearchForm />
     <CardContainer />
     <DetailPage />
-    <Footer />
+    <Footer /> */}
     <Routes>
+      <Route path="/" element={<HomePage />} />
       <Route path="/sign-in" element={<SignIsn />} />
       <Route path="/register" element={<Signup />} />
     </Routes>

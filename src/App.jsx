@@ -1,14 +1,13 @@
 import { Route, Routes } from "react-router-dom";
-import CardContainer from "./features/cards";
-import GoogleMap from "./features/googleMap";
-import SearchForm from "./features/searchForm";
-import DetailPage from "./layout";
-import Footer from "./layout/footer";
-import { Header } from "./layout/header";
+
 
 import SignIsn from "./pages/SignIn";
 import Signup from "./pages/Signup/Signup";
 import HomePage from "./pages/HomePage";
+import UsersProfile from "./pages/UserProfile/UserProfile";
+import Contact from "./pages/Contact/Contact";
+import AboutUs from "./pages/AboutUs/AboutUs";
+import DetailsPage from "./pages/DetailsPage/DetailsPage";
 
 function App() {  
   return (
@@ -23,6 +22,11 @@ function App() {
       <Route path="/" element={<HomePage />} />
       <Route path="/sign-in" element={<SignIsn />} />
       <Route path="/register" element={<Signup />} />
+      <Route path="/profile" element={<UsersProfile />} />
+      <Route path="/profile/profile" element={<HomePage />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/about-us" element={<AboutUs />} />
+      <Route path="/:title" element={<DetailsPage />} />
     </Routes>
     </>
   )

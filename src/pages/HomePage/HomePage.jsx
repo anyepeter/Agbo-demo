@@ -6,7 +6,7 @@ import SearchForm from '../../features/searchForm';
 import Headings from '../../components/Headings/Headings';
 import CardContainer from '../../features/cards';
 import Footer from '../../layout/footer';
-//import { Test } from './HomePage.styles';
+
 
 const HomePage = (props) => (
   <>

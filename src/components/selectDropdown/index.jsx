@@ -3,12 +3,13 @@ import { IoIosArrowDown } from "react-icons/io";
 import { useTranslation } from 'react-i18next';
 
 const LanguageDropdown = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState('En');
+  const [selectedLanguage, setSelectedLanguage] = useState(localStorage.getItem('language') || 'En');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { i18n } = useTranslation();
   const handleLanguageChange = (language) => {
     setSelectedLanguage(language);
     i18n.changeLanguage(language);
+    localStorage.setItem('language', language);
     closeDropdown();
   };
 
@@ -30,7 +31,6 @@ const LanguageDropdown = () => {
       </button>
       {isDropdownOpen && (
         <div className="absolute z-50 -left-[20px] mt-2 w-auto bg-white shadow-lg rounded-md overflow-hidden">
-          {/* Dropdown content */}
           <a
             href="#"
             className={`block px-4 py-2 text-gray-800 hover:text-primaryColor hover:bg-gray-200 ${selectedLanguage === 'En' ? 'font-bold' : ''}`}
@@ -41,11 +41,10 @@ const LanguageDropdown = () => {
           <a
             href="#"
             className={`block px-4 py-2 text-gray-800 hover:text-primaryColor hover:bg-gray-200 ${selectedLanguage === 'Fn' ? 'font-bold' : ''}`}
-            onClick={() => handleLanguageChange('es')}
+            onClick={() => handleLanguageChange('fn')}
           >
             French
           </a>
-          {/* Add more languages as needed */}
         </div>
       )}
     </div>

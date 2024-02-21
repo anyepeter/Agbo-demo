@@ -14,6 +14,10 @@ export default {
         customGreen: '#33FF57',
        
       },
+      fontFamily: {
+        comfortaa: ['Comfortaa', 'sans-serif'],
+        muli: ['Mulish', 'sans-serif']
+      }
     },
   },
   plugins: [

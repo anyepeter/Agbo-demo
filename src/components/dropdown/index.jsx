@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { IoIosArrowDown } from "react-icons/io";
-import { service } from '../../data/dataset';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
 const Dropdown = ( { name }) => {
   const [isHovered, setIsHovered] = useState(false);
-
-  console.log(service)
-
+  const { t } = useTranslation();
+  const category  = useSelector(state => state.data.type)
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -21,7 +21,7 @@ const Dropdown = ( { name }) => {
     onMouseLeave={handleMouseLeave}
     >
       <div
-        className="cursor-pointer rounded-md hover:text-primaryColor text-gray-600 duration-75 ease-linear gap-1 flex items-center"
+        className="cursor-pointer rounded-md hover:text-primaryColor text-gray-600 transition-colors duration-150 ease-in-out gap-1 flex items-center"
         onMouseEnter={handleMouseEnter}
       >
         <p>{name}</p> <IoIosArrowDown style={{ fontSize: '0.75rem' }} />
@@ -32,10 +32,10 @@ const Dropdown = ( { name }) => {
         onMouseLeave={handleMouseLeave}
       >
 
-        <div className="p-2">
-        {service?.map((item) => {
+        <div className="">
+        {category?.map((item) => {
            return(
-            <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-200 hover:text-primaryColor">{item.category}</a>
+            <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-200 hover:text-primaryColor">{t(item.category)}</a>
            )
         })}
         </div>

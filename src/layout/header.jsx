@@ -3,8 +3,8 @@ import { useState, useRef, useEffect } from "react"
 import logoTwo from '../assets/Artboard2.png'
 import DropdownButton from "../components/dropdown"
 import LanguageDropdown from "../components/selectDropdown"
-import { service } from "../data/dataset"
-import { SignedOut, SignedIn } from "@clerk/clerk-react"
+import { SignedOut, SignedIn, useUser } from "@clerk/clerk-react"
+import { Link, NavLink} from "react-router-dom"
 
 // Profile Dropdown
 const ProfileDropDown = (props) => {
@@ -12,13 +12,14 @@ const ProfileDropDown = (props) => {
     const [state, setState] = useState(false)
     const profileRef = useRef()
 
-    console.log(service)
+    const { user } = useUser()
+    
+    const LogOut = () => {
+        localStorage.clear()
+        window.location.reload();
+    }
 
-    const navigation = [
-        { title: "Dashboard", path: "javascript:void(0)" },
-        { title: "Settings", path: "javascript:void(0)" },
-        { title: "Log out", path: "javascript:void(0)" },
-    ]
+
 
     
     useEffect(() => {
@@ -37,25 +38,26 @@ const ProfileDropDown = (props) => {
                     onClick={() => setState(!state)}
                 >
                     <img
-                        src="https://randomuser.me/api/portraits/men/46.jpg"
+                        src={user?.imageUrl}
                         className="w-full h-full rounded-full"
                     />
                 </button>
                 <div className="lg:hidden">
-                    <span className="block">Micheal John</span>
-                    <span className="block text-sm text-gray-500">john@gmail.com</span>
+                    <span className="block">{user?.fullName}</span>
+                    <span className="block text-sm text-gray-500">{user?.emailAddresses[0].emailAddress}</span>
                 </div>
             </div>
             <ul className={`bg-white top-12 right-0 mt-5 space-y-5 lg:absolute lg:border lg:rounded-md lg:text-sm lg:w-52 lg:shadow-md lg:space-y-0 lg:mt-0 ${state ? '' : 'lg:hidden'}`}>
-                {
-                    navigation.map((item, idx) => (
                         <li>
-                            <a key={idx} className="block text-gray-600 lg:hover:bg-gray-50 lg:p-2.5" href={item.path}>
-                                {item.title}
-                            </a>
+                            <Link className="block text-gray-600 lg:hover:bg-gray-50 lg:p-2.5" to="/profile">
+                                Setting
+                            </Link>
                         </li>
-                    ))
-                }
+                        <li>
+                        <p className="block text-gray-600 lg:hover:bg-gray-50 lg:p-2.5" onClick={LogOut} to="/">
+                            Log out
+                        </p>
+                        </li>
             </ul>
         </div>
         </SignedIn>
@@ -74,36 +76,37 @@ export const Header = () => {
 
   // Replace javascript:void(0) path with your path
   const navigation = [
-      { title: "About", path: "javascript:void(0)" },
-      { title: "Contact", path: "javascript:void(0)" },
-      { title: "Partners", path: "javascript:void(0)" },
+      { title: "About", path: "/about-us" },
+      { title: "Contact", path: "/contact" },
   ]
     return (
         <nav className="bg-white border-b-[2px] w-full">
             <div className="flex items-center space-x-8 py-3 px-4 max-w-screen-xl mx-auto md:px-8">
                 <div className="flex-none lg:flex-initial">
-                    <a href="javascript:void(0)">
+                    <Link to="/">
                         <img
                             src={logoTwo}
                             width={120} 
                             height={50}
                             alt="Agbo logo"
                         />
-                    </a>
+                    </Link>
                 </div>
                 <div className="flex-1 flex items-center justify-between">
                     <div className={`bg-white absolute z-20 w-full top-16 left-0 p-4 border-b lg:static lg:block lg:border-none ${menuState ? '' : 'hidden'}`}>
                         
                         <ul className="mt-12 space-y-5 lg:flex lg:space-x-6 lg:space-y-0 lg:mt-0">
                             <li>
-                                <a><DropdownButton  name="Category" /></a>
+                                <p><DropdownButton  name="Category" /></p>
                             </li>
                             {
                                 navigation.map((item, idx) => (
-                                    <li key={idx} className="text-gray-600 hover:text-primaryColor ">
-                                        <a href={item.path}>
+                                    <li key={idx} className="text-gray-600 transition-colors duration-150 ease-in-out hover:text-primaryColor">
+                                        <NavLink to={item.path}  style={({ isActive }) => {
+                                                    return isActive ? { color: "#17C788" } : {};
+                                                    }}>
                                             {item.title}
-                                        </a>
+                                        </NavLink>
                                     </li>
                                 ))
                             }

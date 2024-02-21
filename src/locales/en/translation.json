@@ -1,3 +1,10 @@
 {
-    "welcome": "Welcome to my app!"
+    "welcome": "Welcome to my app!",
+    "Schools": "Schools",
+    "hospital": "Hospital",
+    "Restaurant": "Restaurant",
+    "Hotel": "Hotel",
+    "AmericanSchoolDescription": "The American School of Yaounde (ASOY) in Quartier",
+    "secondSchoolDescription": "Pamoja collaborates with the IB to develop and deliver a broad range of authorized DP online subjects. These courses support IB students completing their DP education at authorized IBWS. Students at any IB World School (IBWS) can follow individual DP courses online if their preferred subject is not available at their school. Additionally, in 2022 the IB launched a fully online DP pilot, giving students the opportunity to complete the whole DP online"
+
   }

@@ -8,10 +8,12 @@ import CardContainer from '../../features/cards';
 import Footer from '../../layout/footer';
 
 
-const HomePage = (props) => (
+const HomePage = () => (
   <>
   <Header />
+  <div className='mt-[80px]'>
   <GoogleMap />
+  </div>
   <SearchForm />
   <div className='w-full flex justify-center items-center'>
   <div className='w-full flex flex-col justify-center  items-center'>

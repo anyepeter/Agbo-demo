@@ -3,10 +3,13 @@ import { IoIosArrowDown } from "react-icons/io";
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
+
 const Dropdown = ( { name }) => {
   const [isHovered, setIsHovered] = useState(false);
   const { t } = useTranslation();
   const category  = useSelector(state => state.data.type)
+  const services = useSelector(state => state.data.data)
+
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -15,6 +18,14 @@ const Dropdown = ( { name }) => {
   const handleMouseLeave = () => {
     setIsHovered(false);
   };
+
+  const handleCategory = (e) => {
+    const filteredService = services.filter(item => {
+      return (!e || item.category === e)
+    });
+    const baseUrl = window.location.origin;
+    window.location.href = `${baseUrl}/filter/search/results?data=${encodeURIComponent(JSON.stringify(filteredService))}`;
+  }
 
   return (
     <div className="relative inline-block"
@@ -35,7 +46,7 @@ const Dropdown = ( { name }) => {
         <div className="">
         {category?.map((item) => {
            return(
-            <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-200 hover:text-primaryColor">{t(item.category)}</a>
+            <p onClick={() => handleCategory(item.category)} className="block px-4 py-2 text-gray-800 hover:bg-gray-200 hover:text-primaryColor cursor-pointer">{item.category}</p>
            )
         })}
         </div>

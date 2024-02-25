@@ -8,6 +8,8 @@ import UsersProfile from "./pages/UserProfile/UserProfile";
 import Contact from "./pages/Contact/Contact";
 import AboutUs from "./pages/AboutUs/AboutUs";
 import DetailsPage from "./pages/DetailsPage/DetailsPage";
+import FilterSearch from "./pages/FilterSearch/FilterSearch";
+import CategoryFilter from "./pages/CategoryFilter/CategoryFilter";
 
 function App() {  
   return (
@@ -27,6 +29,8 @@ function App() {
       <Route path="/contact" element={<Contact />} />
       <Route path="/about-us" element={<AboutUs />} />
       <Route path="/:title" element={<DetailsPage />} />
+      <Route path="/filter/search/:data/results" element={<FilterSearch />} />
+      <Route path="/filter/search/results" element={<CategoryFilter />} />
     </Routes>
     </>
   )

@@ -31,20 +31,18 @@ const LanguageDropdown = () => {
       </button>
       {isDropdownOpen && (
         <div className="absolute z-50 -left-[20px] mt-2 w-auto bg-white shadow-lg rounded-md overflow-hidden">
-          <a
-            href="#"
+          <p
             className={`block px-4 py-2 text-gray-800 hover:text-primaryColor hover:bg-gray-200 ${selectedLanguage === 'En' ? 'font-bold' : ''}`}
             onClick={() => handleLanguageChange('en')}
           >
             English
-          </a>
-          <a
-            href="#"
+          </p>
+          <p
             className={`block px-4 py-2 text-gray-800 hover:text-primaryColor hover:bg-gray-200 ${selectedLanguage === 'Fn' ? 'font-bold' : ''}`}
             onClick={() => handleLanguageChange('fn')}
           >
             French
-          </a>
+          </p>
         </div>
       )}
     </div>

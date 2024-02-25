@@ -9,6 +9,8 @@ import { useEffect, useState } from "react";
 import { useTranslation } from 'react-i18next';
 import Gallery from "../../features/Gallery";
 import { useLocation } from "react-router-dom";
+import { Header } from "../../layout/header";
+import Footer from "../../layout/footer";
 
 const DetailsPage = () => {
     const [open, setOpen  ] = useState(false)
@@ -32,18 +34,22 @@ const DetailsPage = () => {
 
   const { service } = location.state
 
+  console.log(service)
+
 
     return(
+      <>
+      <Header />
         <section className="w-full bg-white flex justify-center items-start">
 
             <main className="md:max-w-7xl w-full p-4 md:pr-8 md:pl-8 flex flex-col gap-8">
                 <div className="flex justify-between items-center">
                     <div className="flex flex-col gap-2" >
                       <div className="flex justify-start">
-                       <p className="p-2 bg-primaryColor w-auto text-white rounded-md">{service.category}</p>
+                       <p className="p-2 bg-primaryColor w-auto text-white rounded-md">{service?.category}</p>
                        </div>
-                       <p className="font-bold">{service.title}</p>
-                       <p className="flex items-center"> <MdLocationPin className="text-primaryColor" /> {service.location.description}</p>
+                       <p className="font-bold">{service?.title}</p>
+                       <p className="flex items-center"> <MdLocationPin className="text-primaryColor" /> {service?.location.description}</p>
                     </div>
                     <div className="self-end">
                         <div className="flex">
@@ -58,7 +64,7 @@ const DetailsPage = () => {
                 </div>
 
                 <div className="w-full  h-[300px] md:h-[600px] lg:h-[700px]">
-                    <Gallery image={service.images}/>
+                    <Gallery image={service?.images}/>
                 </div>
 
                 <section className="w-full flex flex-col gap-4 md:flex-row">
@@ -66,12 +72,12 @@ const DetailsPage = () => {
                         <div >
                             <h1 className="font-bold">Description</h1>
                             <p className="w-full p-4 mt-4 bg-secondaryColor">
-                              {service.description}</p>
+                              {service?.description}</p>
                         </div>
                         <div>
                             <h1 className="font-bold">Video</h1>
                             <div className="w-full h-[300px] relative bg-black mt-2">
-                                <img className=" w-full h-[300px] opacity-30" src={service.images[0]} />
+                                <img className=" w-full h-[300px] opacity-30" src={service?.images[0]} />
                                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 h-[50px] w-[50px] bg-primaryColor flex justify-center items-center rounded-[50%] cursor-pointer" onClick={handleClick}>
                                 <FaPlay className="text-white" />
                             </div>
@@ -171,11 +177,11 @@ const DetailsPage = () => {
 
                 </section>
 
-
-
             </main>
             
         </section>
+        <Footer />
+      </>
     )
 }
 

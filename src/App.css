@@ -7,6 +7,14 @@
 
 }
 
+.truncates-location{
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
+}
+
 .buttonStyle{
         visibility: visible;
         font-size: 30px;
@@ -19,6 +27,10 @@
 .awesomeHigh{
     height: 160px;
     width: 100%;
+}
+
+.boder-line{
+    border-right: 2px solid #E5E7EB;
 }
 
 .bgImg{

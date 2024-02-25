@@ -19,9 +19,6 @@ const ProfileDropDown = (props) => {
         window.location.reload();
     }
 
-
-
-    
     useEffect(() => {
         const handleDropDown = (e) => {
             if (!profileRef.current.contains(e.target)) setState(false)
@@ -80,7 +77,7 @@ export const Header = () => {
       { title: "Contact", path: "/contact" },
   ]
     return (
-        <nav className="bg-white border-b-[2px] w-full">
+        <nav className="bg-white border-b-[2px] w-full fixed -top-1  md:top-0 z-50">
             <div className="flex items-center space-x-8 py-3 px-4 max-w-screen-xl mx-auto md:px-8">
                 <div className="flex-none lg:flex-initial">
                     <Link to="/">

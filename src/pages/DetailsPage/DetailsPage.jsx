@@ -21,7 +21,6 @@ const DetailsPage = () => {
         setOpen(true)
         console.log(open)
     };
-
     const handleClose = () => {
         setOpen(false)
         console.log(open)

@@ -3,7 +3,7 @@ import { SignIn } from "@clerk/clerk-react";
 //import { Test } from './SignIn.styles';
 
 const SignIsn = (props) => (
-  <div className="SignInWrapper">
+  <div className="w-full flex justify-center items-center h-screen">
     <SignIn path="/sign-in" routing="path" signUpUrl="/register" />
   </div>
 );

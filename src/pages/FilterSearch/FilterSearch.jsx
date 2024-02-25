@@ -11,9 +11,12 @@ import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
 import ReactPaginate from 'react-paginate';
+import { useUser } from '@clerk/clerk-react';
+import { XCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const FilterSearch = () => {
-
+  const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     category: '',
     title: '',
@@ -25,7 +28,7 @@ const FilterSearch = () => {
   const services = useSelector(state => state.data.data)
   const category = useSelector(state => state.data.type)
   const [isLoading, setIsLoading] = useState(false);
-
+  const { user } = useUser();
 
   const handleChange = (e) => {
     setFormData({
@@ -51,8 +54,16 @@ const FilterSearch = () => {
 
     const { t } = useTranslation()
     const handleTitleClick = (service) => {
+      if (user) {
         navigate(`/:${service.title}`, { state: { service } });
+    } else {
+        setOpen(true)
+    }
     };
+
+    const handleClose = () => {
+      setOpen(false);
+  }
 
     const [itemOffset, setItemOffset] = useState(0);
 
@@ -169,7 +180,15 @@ const FilterSearch = () => {
 
           {/* Cards */} 
           <div>
-          <section className='w-full flex justify-center bg-white pt-4'>
+          <div style={{ display: open ? 'flex' : 'none', transition: 'all ease-in 0.2s' }} className='justify-center items-center py-4 w-full h-screen fixed z-50 top-0 left-0 right-0 bottom-0 bg-opacity-90 bg-black '>
+                    <div className=' w-80 bg-white relative rounded-2xl pt-6 p-4 flex flex-col justify-between items-center gap-2 '>
+                        <XCircle className='absolute top-1 right-1 cursor-pointer' onClick={handleClose} />
+                        <h1 className='text-4xl font-comfortaa font-[900]'>Sign Up today!</h1>
+                        <p className='font-muli text-center pr-8 pl-8 text-opacity-50 text-black leading-tight'>Sign up today in other to see all the services in details</p>
+                        <Link to={'/sign-in'} className='bg-primaryColor w-full p-4 text-center text-white rounded-2xl leading-tight mt-2 hover:bg-white'>Sign Up</Link>
+                    </div>
+                </div>
+          <section className='w-full flex justify-center bg-white pt-4 md:p-0 md:pt-4 '>
             <div className='w-full  grid grid-cols-1  gap-8 ' >
 
                 {
@@ -200,7 +219,7 @@ const FilterSearch = () => {
                         </div>
                         <div className='w-full bg-white border-none flex flex-col justify-between gap-1 md:gap-2'>
                             <h1 onClick={() => handleTitleClick(service)} className='z-full pt-1  pl-2 pr-2 md:pt-4 md:pl-4 text-sm md:text-lg font-bold hover:text-primaryColor cursor-pointer hover:transition-colors hover:duration-300 transition-colors duration-300 truncates-title'>{service.title}</h1>
-                            <p className='z-full pl-2 flex items-center truncates-title pr-2 md:pl-4 mb-2 text-sm' ><MdLocationPin className='text-primaryColor' style={{ fontSize: '1rem' }} /> {service.location.description}</p>
+                            <p className='z-full pl-2 flex items-center pr-2 md:pl-4 mb-2 text-sm' ><MdLocationPin className='text-primaryColor' style={{ fontSize: '1rem' }} /> <span className='truncates-title'>{service.location.description}</span></p>
                             <div className='w-full bg-secondaryColor p-2'>
                                 <p className='w-full truncates text-xs md:text-sm'>{service.description}
                                 </p>

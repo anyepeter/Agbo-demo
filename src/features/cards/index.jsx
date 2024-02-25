@@ -77,7 +77,7 @@ const CardContainer = () => {
                         </div>
                         <div className='w-full bg-white border-none flex flex-col justify-between gap-1 md:gap-2'>
                             <h1 onClick={() => handleTitleClick(service)} className='z-full pt-1 md:pt-2 pl-2 pr-2 md:pt-4 md:pl-4 text-sm md:text-lg font-bold hover:text-primaryColor cursor-pointer hover:transition-colors hover:duration-300 transition-colors duration-300 truncates-location'>{service.title}</h1>
-                            <p className='z-full pl-2 flex items-center  pr-2 md:pl-4 mb-2 text-sm' > <MdLocationPin style={{ fontSize: '1rem' }} className='text-primaryColor' /> {service.location.description}</p>
+                            <p className='z-full pl-2 flex items-center pr-2 md:pl-4 mb-2 text-sm' > <MdLocationPin style={{ fontSize: '1rem' }} className='text-primaryColor' /> <span className=' truncates-title'>{service.location.description}</span></p>
                             <div className='w-full bg-secondaryColor p-2'>
                                 <p className='w-full truncates text-xs md:text-sm'>{service.description}
                                 </p>

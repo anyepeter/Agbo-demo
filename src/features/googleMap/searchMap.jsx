@@ -7,6 +7,9 @@ import AwesomeSlider from 'react-awesome-slider';
 import { MdLocationPin } from "react-icons/md";
 import { MdStar } from "react-icons/md";
 import { MdStarBorder } from "react-icons/md";
+import { Link, useNavigate } from 'react-router-dom';
+import { useUser } from '@clerk/clerk-react';
+import { XCircle } from 'lucide-react';
 
 const containerStyle = {
   width: '100%',
@@ -26,6 +29,24 @@ const center = {
     id: 'google-map-script',
     googleMapsApiKey: "AIzaSyAFMbjca_jtUOeaQoeBZIiDbXmdyrN0Di0"
   })
+
+  const [open, setOpen] = useState(false);
+
+  const { user } = useUser();
+  const navigate = useNavigate();
+
+  const handleTitleClick = (service) => {
+    if (user) {
+        navigate(`/:${service.title}`, { state: { service } });
+    } else {
+        setOpen(true)
+    }
+};
+
+const handleClose = () => {
+  setOpen(false);
+}
+
 
   const [selectedMarker, setSelectedMarker] = useState(null);
 
@@ -89,8 +110,8 @@ const center = {
                   }
                 </AwesomeSlider>
             <div className='flex  flex-col gap-1 mb-1'>
-              <h1 className=' pt-1 pl-1 text-sm font-[900] font-comfortaa'> {selectedMarker.title}</h1>
-              <p className='pl-1 text-xs flex'><MdLocationPin style={{ fontSize: '1rem' }} className='text-primaryColor' /><span>{selectedMarker.location.description}</span></p>
+            <h1  onClick={() => handleTitleClick(selectedMarker)} className=' pt-1 pl-1 text-sm font-[900] font-comfortaa  hover:text-primaryColor cursor-pointer hover:transition-colors hover:duration-300 transition-colors duration-300 truncates-location'> {selectedMarker.title}</h1>
+              <p className='pl-1 text-xs flex items-center'><MdLocationPin style={{ fontSize: '1rem' }} className='text-primaryColor' /><span className=' truncates-title'>{selectedMarker.location.description}</span></p>
               <div className='self-end mt-2 mb-2 flex pr-2'>
                         <MdStar style={{ fontSize: '1rem' }} className='text-primaryColor' />
                         <MdStar style={{ fontSize: '1rem' }} className='text-primaryColor'/>
@@ -102,6 +123,16 @@ const center = {
           </div>
         </InfoWindowF>
       )}
+
+      
+<div style={{ display: open ? 'flex' : 'none', transition: 'all ease-in 0.2s' }} className='justify-center items-center py-4 w-full h-screen fixed z-50 top-0 left-0 right-0 bottom-0 bg-opacity-90 bg-black '>
+                    <div className=' w-80 bg-white relative rounded-2xl pt-6 p-4 flex flex-col justify-between items-center gap-2 '>
+                        <XCircle className='absolute top-1 right-1 cursor-pointer' onClick={handleClose} />
+                        <h1 className='text-4xl font-comfortaa font-[900]'>Sign Up today!</h1>
+                        <p className='font-muli text-center pr-8 pl-8 text-opacity-50 text-black leading-tight'>Sign up today in other to see all the services in details</p>
+                        <Link to={'/sign-in'} className='bg-primaryColor w-full p-4 text-center text-white rounded-2xl leading-tight mt-2 hover:bg-white'>Sign Up</Link>
+                    </div>
+                </div>
       </GoogleMap>
     ) : <>
     <div className='w-full h-[100vh]'>

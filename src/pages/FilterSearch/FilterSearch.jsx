@@ -85,7 +85,7 @@ const FilterSearch = () => {
       
       {/* googleMap */}
 
-      <GoogleSearch />
+      <GoogleSearch service={currentItems}/>
         
       </div>
       <div className='w-full  pt-4 flex justify-end overflow-x-hidden'>

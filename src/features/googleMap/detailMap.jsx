@@ -7,10 +7,6 @@ const containerStyle = {
   height: '300px'
 };
 
-const center = {
-    lat: -37.8136,
-    lng: 144.9631
-};
 
 const markers = [
     { id: 1, position: { lat: -37.9136, lng: 144.9631 }, title: "Marker 1", image: "image1.jpg" },
@@ -21,7 +17,10 @@ const markers = [
 
   
 
-function GooglesDetails() {
+function GooglesDetails({service}) {
+
+  console.log(service);
+
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: "AIzaSyAFMbjca_jtUOeaQoeBZIiDbXmdyrN0Di0"
@@ -40,17 +39,13 @@ function GooglesDetails() {
     return isLoaded ? (
       <GoogleMap
         mapContainerStyle={containerStyle}
-        center={center}
+        center={service.position}
         zoom={13}
       >
-   {markers.map(marker => (
         <MarkerF
-          key={marker.id}
-          position={marker.position}
-          title={marker.title}
-          onClick={() => handleMarkerClick(marker)}
+          position={service.position}
+        
         />
-      ))}
       </GoogleMap>
     ) : <>
     <div className='w-full h-[200px]'>

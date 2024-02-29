@@ -1,27 +1,27 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { GoogleMap, InfoWindowF, MarkerF, useJsApiLoader } from '@react-google-maps/api';
 import lof from '../../assets/logoTwo.jpg'
+import school from '../../assets/school.png';
+import cutlery from '../../assets/cutlery.png';
+import AwesomeSlider from 'react-awesome-slider';
+import { MdLocationPin } from "react-icons/md";
+import { MdStar } from "react-icons/md";
+import { MdStarBorder } from "react-icons/md";
 
 const containerStyle = {
   width: '100%',
   height: '90vh'
 };
 
+
 const center = {
-    lat: -37.8136,
-    lng: 144.9631
+  lat: 3.8480,
+  lng: 11.5021
 };
 
-const markers = [
-    { id: 1, position: { lat: -37.9136, lng: 144.9631 }, title: "Marker 1", image: "image1.jpg" },
-    { id: 2, position: { lat: -37.1036, lng: 144.9631 }, title: "Marker 2", image: "image2.jpg" },
-    { id: 3, position: { lat: -37.5936, lng: 144.9631 }, title: "Marker 3", image: "image3.jpg" },
-    { id: 4, position: { lat: -37.2836, lng: -37.8136 }, title: "Marker 4", image: "image4.jpg" }
-  ];
 
-  
+  function GoogleSearch({ service }) {
 
-function GoogleSearch() {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: "AIzaSyAFMbjca_jtUOeaQoeBZIiDbXmdyrN0Di0"
@@ -36,6 +36,7 @@ function GoogleSearch() {
   const handleCloseInfoWindow = () => {
     setSelectedMarker(null);
   };
+
   
     return isLoaded ? (
       <GoogleMap
@@ -43,14 +44,64 @@ function GoogleSearch() {
         center={center}
         zoom={13}
       >
-   {markers.map(marker => (
+   {service?.map(marker => (
         <MarkerF
           key={marker.id}
-          position={marker.position}
+          position={marker.location.position}
           title={marker.title}
           onClick={() => handleMarkerClick(marker)}
+          options={{
+            icon: {
+              url: (marker.category == "Schools") ? school : cutlery,
+              scaledSize: new window.google.maps.Size(50, 50),
+              origin: new window.google.maps.Point(0, 0),
+              anchor: new window.google.maps.Point(25, 50)
+            }
+          }}
         />
       ))}
+
+{selectedMarker && (
+        <InfoWindowF
+          position={selectedMarker.location.position}
+          onCloseClick={handleCloseInfoWindow}
+          className="maps"
+
+        >
+          <div className='w-56 '>
+          <AwesomeSlider
+                organicArrows={false}
+                buttonContentRight={<p className='buttonStyle'>{">"}</p>}
+                buttonContentLeft={<p  className='buttonStyle '>{"<"}</p>}
+                bullets={false}
+              className=' awesomeHigh'
+                >
+                  {
+                    selectedMarker.images?.map((image) => (
+                      <div>
+                      <img
+                        className='bgImg'
+                        alt="Wow"
+                        src={image}
+                      />
+                  </div>
+                    ))
+                  }
+                </AwesomeSlider>
+            <div className='flex  flex-col gap-1 mb-1'>
+              <h1 className=' pt-1 pl-1 text-sm font-[900] font-comfortaa'> {selectedMarker.title}</h1>
+              <p className='pl-1 text-xs flex'><MdLocationPin style={{ fontSize: '1rem' }} className='text-primaryColor' /><span>{selectedMarker.location.description}</span></p>
+              <div className='self-end mt-2 mb-2 flex pr-2'>
+                        <MdStar style={{ fontSize: '1rem' }} className='text-primaryColor' />
+                        <MdStar style={{ fontSize: '1rem' }} className='text-primaryColor'/>
+                        <MdStar style={{ fontSize: '1rem' }} className='text-primaryColor'/>
+                        <MdStarBorder style={{ fontSize: '1rem' }} className='text-primaryColor' />
+                        <MdStarBorder style={{ fontSize: '1rem' }} className='text-primaryColor'/>
+              </div>
+            </div>
+          </div>
+        </InfoWindowF>
+      )}
       </GoogleMap>
     ) : <>
     <div className='w-full h-[100vh]'>

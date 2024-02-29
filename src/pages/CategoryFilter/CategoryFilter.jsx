@@ -91,16 +91,15 @@ const CategoryFilter = () => {
   <Header />
   <section className='w-full '>
     <main  className=' mt-[80px]'>
-    <div className=" lg:fixed  lg:w-[50%] lg:top-[80px]">
+    <div className=" lg:fixed lg:w-[50%] lg:top-[80px]">
       
       {/* googleMap */}
 
-      <GoogleSearch />
+      <GoogleSearch service = {currentItems}/>
         
       </div>
       <div className='w-full pt-4 flex justify-end overflow-x-hidden'>
         <div className=" lg:w-[50%] p-4">
-
 
           {/* search form */}
           <div className='w-full'>

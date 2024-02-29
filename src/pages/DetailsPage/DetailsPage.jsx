@@ -39,7 +39,7 @@ const DetailsPage = () => {
     return(
       <>
       <Header />
-        <section className="w-full bg-white flex justify-center items-start">
+        <section className="w-full mt-[90px] bg-white flex justify-center items-start">
 
             <main className="md:max-w-7xl w-full p-4 md:pr-8 md:pl-8 flex flex-col gap-8">
                 <div className="flex justify-between items-center">
@@ -106,7 +106,7 @@ const DetailsPage = () => {
 
                         <div>
                             <h1 className="font-bold" >Location</h1>
-                            <GooglesDetails />
+                            <GooglesDetails service={service.location}/>
                         </div>
                     </div>
                 </section>

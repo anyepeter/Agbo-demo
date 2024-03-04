@@ -7,6 +7,7 @@ import i18n from 'i18next';
 // import LanguageDetector from 'i18next-browser-languagedetector';
 import translations from './locales/en/translation.json';
 import Fntranslation from './locales/fn/translation.json'
+import Sptranslation from './locales/sp/translation.json'
 import { ClerkProvider } from '@clerk/clerk-react'
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -30,6 +31,9 @@ i18n
       },
       fn: {
         translation: Fntranslation,
+      },
+      sp: {
+        translation: Sptranslation,
       }
     },
     lng: localStorage.getItem('language') || 'en',

@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react"
 
 import logoTwo from '../assets/Artboard2.png'
+import { useTranslation } from 'react-i18next';
 import DropdownButton from "../components/dropdown"
 import LanguageDropdown from "../components/selectDropdown"
 import { SignedOut, SignedIn, useUser } from "@clerk/clerk-react"
@@ -11,7 +12,7 @@ const ProfileDropDown = (props) => {
 
     const [state, setState] = useState(false)
     const profileRef = useRef()
-
+ 
     const { user } = useUser()
     
     const LogOut = () => {
@@ -68,7 +69,7 @@ const ProfileDropDown = (props) => {
 }
 
 export const Header = () => {
-
+    const { t } = useTranslation()
     const [menuState, setMenuState] = useState(false)
 
   // Replace javascript:void(0) path with your path
@@ -102,7 +103,7 @@ export const Header = () => {
                                         <NavLink to={item.path}  style={({ isActive }) => {
                                                     return isActive ? { color: "#17C788" } : {};
                                                     }}>
-                                            {item.title}
+                                            {t(item.title)}
                                         </NavLink>
                                     </li>
                                 ))

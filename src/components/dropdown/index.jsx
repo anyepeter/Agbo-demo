@@ -35,7 +35,7 @@ const Dropdown = ( { name }) => {
         className="cursor-pointer rounded-md hover:text-primaryColor text-gray-600 transition-colors duration-150 ease-in-out gap-1 flex items-center"
         onMouseEnter={handleMouseEnter}
       >
-        <p>{name}</p> <IoIosArrowDown style={{ fontSize: '0.75rem' }} />
+        <p>{t(name)}</p> <IoIosArrowDown style={{ fontSize: '0.75rem' }} />
       </div>
       <div
         className={`absolute z-10 left-0 w-48 shadow-lg rounded-md bg-white overflow-hidden  ${isHovered ? '' : 'hidden'}`}
@@ -46,7 +46,7 @@ const Dropdown = ( { name }) => {
         <div className="">
         {category?.map((item) => {
            return(
-            <p onClick={() => handleCategory(item.category)} className="block px-4 py-2 text-gray-800 hover:bg-gray-200 hover:text-primaryColor cursor-pointer">{item.category}</p>
+            <p onClick={() => handleCategory(item.category)} className="block px-4 py-2 text-gray-800 hover:bg-gray-200 hover:text-primaryColor cursor-pointer">{t(item.category)}</p>
            )
         })}
         </div>

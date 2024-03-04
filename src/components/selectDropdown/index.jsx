@@ -43,6 +43,12 @@ const LanguageDropdown = () => {
           >
             French
           </p>
+          <p
+            className={`block px-4 py-2 text-gray-800 hover:text-primaryColor hover:bg-gray-200 ${selectedLanguage === 'sp' ? 'font-bold' : ''}`}
+            onClick={() => handleLanguageChange('sp')}
+          >
+            Spanish
+          </p>
         </div>
       )}
     </div>

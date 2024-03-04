@@ -45,7 +45,7 @@ const DetailsPage = () => {
                 <div className="flex justify-between items-center">
                     <div className="flex flex-col gap-2" >
                       <div className="flex justify-start">
-                       <p className="p-2 bg-primaryColor w-auto text-white rounded-md">{service?.category}</p>
+                       <p className="p-2 bg-primaryColor w-auto text-white rounded-md">{t(service?.category)}</p>
                        </div>
                        <p className="font-bold">{service?.title}</p>
                        <p className="flex items-center"> <MdLocationPin className="text-primaryColor" /> {service?.location.description}</p>
@@ -71,7 +71,7 @@ const DetailsPage = () => {
                         <div >
                             <h1 className="font-bold">Description</h1>
                             <p className="w-full p-4 mt-4 bg-secondaryColor">
-                              {service?.description}</p>
+                              {t(service?.description)}</p>
                         </div>
                         <div>
                             <h1 className="font-bold">Video</h1>
@@ -136,7 +136,7 @@ const DetailsPage = () => {
                                     type="submit"
                                     className="w-28 h-12 bg-primaryColor  text-white font-bold py-2 px-4 rounded self-end"
                                 >
-                                    Search
+                                    {t('formSearch')}
                                 </button>
                             </div>
                         </form>

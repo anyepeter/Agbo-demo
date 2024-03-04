@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Loader2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const SearchForm = () => {
   const [formData, setFormData] = useState({
@@ -15,6 +16,8 @@ const SearchForm = () => {
   const category = useSelector(state => state.data.type)
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const { t } = useTranslation()
 
   const handleChange = (e) => {
     setFormData({
@@ -52,12 +55,12 @@ const SearchForm = () => {
                     id="category"
                     value={formData.category}
                     onChange={handleChange}
-                    className="w-full h-12 pl-10 pr-4 py-2 leading-tight text-gray-700 border rounded-lg shadow appearance-none focus:outline-none focus:shadow-outline"
+                    className="w-full h-12 pl-4 pr-4 py-2 leading-tight text-gray-700 border rounded-lg shadow appearance-none focus:outline-none focus:shadow-outline "
                 >
-                    <option value="">All categories</option>
+                    <option value="">{t('AllCategory')}</option>
                     {
                       category?.map((items) => (
-                        <option key={items.id} value={items.category}>{items.category}</option>
+                        <option key={items.id} value={items.category}>{t(items.category)}</option>
                       ))
                     }
                 </select>
@@ -70,13 +73,13 @@ const SearchForm = () => {
                     id="region"
                     value={formData.region}
                     onChange={handleChange}
-                    className="w-full h-12 pl-10 pr-4 py-2 leading-tight text-gray-700 border rounded-lg shadow appearance-none focus:outline-none focus:shadow-outline"
+                    className="w-full h-12 pl-4 pr-4 py-2 leading-tight text-gray-700 border rounded-lg shadow appearance-none focus:outline-none focus:shadow-outline"
                 >
-                    <option value="">Enter city</option>
+                    <option value="">{t('EnterCity')}</option>
                     <option value="Yaounde">Yaounde</option>
-                    <option value="">Fashion</option>
-                    <option value="">Sports</option>
-                    <option value="">Home</option>
+                    <option value="Bamenda">Bamenda</option>
+                    <option value="Douala">Douala</option>
+                    <option value="Buea">Buea</option>
                 </select>
                 </div>
             </div>
@@ -90,8 +93,8 @@ const SearchForm = () => {
                     id="title"
                     value={formData.title}
                     onChange={handleChange}
-                    className="w-full h-12 pl-10 pr-4 py-2 leading-tight text-gray-700 border rounded-lg shadow appearance-none focus:outline-none focus:shadow-outline"
-                    placeholder="Title"
+                    className="w-full h-12 pl-4 pr-4 py-2 leading-tight text-gray-700 border rounded-lg shadow appearance-none focus:outline-none focus:shadow-outline"
+                    placeholder={t('TitleForm')}
                 />
                 </div>
             </div>
@@ -104,8 +107,8 @@ const SearchForm = () => {
             id="location"
             value={formData.location}
             onChange={handleChange}
-            className="w-full h-12 pl-10 pr-4 py-2 leading-tight text-gray-700 border rounded-lg shadow appearance-none focus:outline-none focus:shadow-outline"
-            placeholder="Quarter"
+            className="w-full h-12 pl-4 pr-4 py-2 leading-tight text-gray-700 border rounded-lg shadow appearance-none focus:outline-none focus:shadow-outline"
+            placeholder={t('Quarter')}
           />
         </div>
         <div className="w-full">
@@ -114,7 +117,7 @@ const SearchForm = () => {
             type="submit"
             className="w-full h-12 bg-primaryColor flex justify-center items-center text-white font-bold py-2 px-4 rounded self-end"
           >
-           {isLoading ?  <Loader2 color="white"  className='animate-spin' /> : "Search"}
+           {isLoading ?  <Loader2 color="white"  className='animate-spin' /> : t('formSearch')}
           </button>
         </div>
         </div>

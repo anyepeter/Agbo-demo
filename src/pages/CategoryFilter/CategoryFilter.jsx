@@ -118,12 +118,12 @@ const CategoryFilter = () => {
                     id="category"
                     value={formData.category}
                     onChange={handleChange}
-                    className="w-full h-12 pl-10 pr-4 py-2 leading-tight text-gray-700 border rounded-lg shadow appearance-none focus:outline-none focus:shadow-outline"
+                    className="w-full h-12 pl-4 pr-4 py-2 leading-tight text-gray-700 border rounded-lg shadow appearance-none focus:outline-none focus:shadow-outline"
                 >
-                    <option value="">All categories</option>
+                    <option value="">{t('AllCategory')}</option>
                     {
                       category?.map((items) => (
-                        <option key={items.id} value={items.category}>{items.category}</option>
+                        <option key={items.id} value={items.category}>{t(items.category)}</option>
                       ))
                     }
                 </select>
@@ -136,9 +136,9 @@ const CategoryFilter = () => {
                     id="region"
                     value={formData.region}
                     onChange={handleChange}
-                    className="w-full h-12 pl-10 pr-4 py-2 leading-tight text-gray-700 border rounded-lg shadow appearance-none focus:outline-none focus:shadow-outline"
+                    className="w-full h-12 pl-4 pr-4 py-2 leading-tight text-gray-700 border rounded-lg shadow appearance-none focus:outline-none focus:shadow-outline"
                 >
-                    <option value="">Enter city</option>
+                    <option value="">{t('EnterCity')}</option>
                     <option value="electronics">Electronics</option>
                     <option value="fashion">Fashion</option>
                     <option value="sports">Sports</option>
@@ -156,8 +156,8 @@ const CategoryFilter = () => {
                     id="title"
                     value={formData.title}
                     onChange={handleChange}
-                    className="w-full h-12 pl-10 pr-4 py-2 leading-tight text-gray-700 border rounded-lg shadow appearance-none focus:outline-none focus:shadow-outline"
-                    placeholder="Title"
+                    className="w-full h-12 pl-4 pr-4 py-2 leading-tight text-gray-700 border rounded-lg shadow appearance-none focus:outline-none focus:shadow-outline"
+                    placeholder={t('TitleForm')}
                 />
                 </div>
             </div>
@@ -170,8 +170,8 @@ const CategoryFilter = () => {
             id="location"
             value={formData.location}
             onChange={handleChange}
-            className="w-full h-12 pl-10 pr-4 py-2 leading-tight text-gray-700 border rounded-lg shadow appearance-none focus:outline-none focus:shadow-outline"
-            placeholder="Quarter"
+            className="w-full h-12 pl-4 pr-4 py-2 leading-tight text-gray-700 border rounded-lg shadow appearance-none focus:outline-none focus:shadow-outline"
+            placeholder={t('Quarter')}
           />
         </div>
         <div className="w-full">
@@ -180,7 +180,7 @@ const CategoryFilter = () => {
             type="submit"
             className="w-full h-12 bg-primaryColor flex justify-center items-center text-white font-bold py-2 px-4 rounded self-end"
           >
-           {isLoading ?  <Loader2 color="white"  className='animate-spin' /> : "Search"}
+           {isLoading ?  <Loader2 color="white"  className='animate-spin' /> : t('formSearch')}
           </button>
         </div>
         </div>
@@ -196,10 +196,11 @@ const CategoryFilter = () => {
                         <XCircle className='absolute top-1 right-1 cursor-pointer' onClick={handleClose} />
                         <h1 className='text-4xl font-comfortaa font-[900]'>Sign Up today!</h1>
                         <p className='font-muli text-center pr-8 pl-8 text-opacity-50 text-black leading-tight'>Sign up today in other to see all the services in details</p>
-                        <Link to={'/sign-in'} className='bg-primaryColor w-full p-4 text-center text-white rounded-2xl leading-tight mt-2 hover:bg-white'>Sign Up</Link>
+                        <Link to={'/sign-in'} className='bg-primaryColor w-full p-4 text-center text-white rounded-2xl leading-tight mt-2 hover:bg-opacity-80'>Sign Up</Link>
                     </div>
                 </div>
-          <section className='w-full flex justify-center bg-white pt-4 md:p-0 md:pt-4 '>
+          <section className='w-full flex flex-col gap-2 justify-center bg-white pt-4 md:p-0 md:pt-4 '>
+          <div  className='flex w-full justify-center font-comfortaa font-extrabold items-center'>Results<span>({filteredService.length})</span></div>
             <div className='w-full  grid grid-cols-1  gap-8 ' >
 
                 {
@@ -225,13 +226,13 @@ const CategoryFilter = () => {
             ))}
         
       </AwesomeSlider>
-      <h1 className='absolute top-1 z-30 left-1 p-1 bg-primaryColor rounded-md text-white bg-opacity-75'>{service.category}</h1>
+      <h1 className='absolute top-1 z-30 left-1 p-1 bg-primaryColor rounded-md text-white '>{t(service.category)}</h1>
                         </div>
                         <div className='w-full bg-white border-none flex flex-col justify-between gap-1 md:gap-2'>
                             <h1 onClick={() => handleTitleClick(service)} className='z-full pt-1  pl-2 pr-2 md:pt-4 md:pl-4 text-sm md:text-lg font-bold hover:text-primaryColor cursor-pointer hover:transition-colors hover:duration-300 transition-colors duration-300 truncates-title'>{service.title}</h1>
                             <p className='z-full pl-2 flex items-center  pr-2 md:pl-4 mb-2 text-sm' > <MdLocationPin className='text-primaryColor' style={{ fontSize: '1rem' }} /> <span className='truncates-title'>{service.location.description}</span></p>
                             <div className='w-full bg-secondaryColor p-2'>
-                                <p className='w-full truncates text-xs md:text-sm'>{service.description}
+                                <p className='w-full truncates text-xs md:text-sm'>{t(service.description)}
                                 </p>
                             </div>
                             <div className='self-end mt-2 mb-2 flex pr-2'>
